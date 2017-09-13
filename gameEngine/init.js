@@ -50,6 +50,7 @@ var initGame = {
            alert('Zbyt mała rozdzielczość urządzenia by uruchomić grę!');
            return;
         }
+        if (startGame) return;
         startGame = true;
         document.getElementById('interfaceBoard').innerHTML = this.board;
         document.getElementById('interfaceBullets').innerHTML = this.bullets;
