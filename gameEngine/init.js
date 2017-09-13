@@ -17,7 +17,7 @@ player = undefined;
 enemyArmy = undefined;
 mystery = undefined;
 var startGame = false;
-$(function () {
+$(function () { //We create events for buttons
     let startButton = document.querySelector('.interface__startGame');
     startButton.addEventListener('click', () => initGame.startGame());
     let leftButton = document.querySelector('.movement--left');
