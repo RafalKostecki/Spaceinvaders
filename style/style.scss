@@ -1,0 +1,288 @@
+//Colours:
+$blue: #2c59bf;
+
+//Mixins:
+@mixin borderRadius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+@mixin txt ($size, $letterSpacing, $transform, $align, $weight) {
+    font-size: $size;
+    letter-spacing: $letterSpacing;
+    text-transform: $transform;
+    text-align: $align;
+    font-weight: $weight;
+}
+
+html, body {
+    color: #eee;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    min-width: 600px;
+}
+.game {
+    width: 100%;
+    height: 100vh;
+    &__board {
+        width: calc(82% - 15px);
+        height: calc(100vh - 15px);
+        float: left;
+        position: relative;
+    }
+    &--bg {
+        background: #000;
+    }
+    &--decoration {
+        border-right: 15px solid $blue;
+        border-bottom: 15px solid $blue;
+    }
+}
+.interface {
+    width: 14%;
+    height: calc(100vh - 15px);
+    background: #444;
+    float: left;
+    padding: 0 2% 0 2%;
+    &__title {
+        width: 100%;
+        margin: 0 0 8vh 0;
+    }
+    &__startGame {
+        margin: 0 auto;
+    }
+    &__date {
+        margin-top: 8vh;
+    }
+    &__description {
+        position: absolute;
+        bottom: 20px;
+        width: 14%;
+    }
+    &--decoration {
+        background: #000;
+        border-top: 15px solid $blue;
+    }
+    &--frame {
+        border: 2px solid $blue;
+    }
+    &--txtTitle {
+        @include txt(30px, 2px, uppercase, center, 400);
+    }
+    &--txtTitleSign {
+        @include txt(15px, 2px, uppercase, right, 400);
+    }
+    &--txtStartGame {
+        @include txt(30px, 5px, uppercase, center, 700);
+        transition: linear 0.2s;
+        cursor: pointer;
+        &:hover {
+            color: $blue;
+        }
+    }
+    &--txtData {
+        @include txt(16px, 1px, uppercase, left, 400);
+        list-style-type: none;
+        padding: 0;
+        line-height: 22px;
+    }
+    &--txtDescription {
+        @include txt(12px, 1px, uppercase, left, 300);
+    }
+}
+.lives {
+    width: 100%;
+    height: 5vh;
+    margin-top: 7vh;
+    padding-bottom: 5vh;
+    border-bottom: 2px solid $blue;
+    &__box {
+        width: 18%;
+        height: 100%;
+        padding: 1%;
+        float: left;
+    }
+    &--icon {
+        background-image: url('../images/heart.png');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}
+.movement {
+    width: 14%;
+    position: absolute;
+    bottom: 5vh;
+    margin: 0 auto;
+    &__run {
+        width: 8vh;
+        height: 8vh;
+    }
+    &__attack {
+        width: calc(100% - 4px - 6%);
+        padding: 3%;
+        margin-top: 4vh;
+        float: left
+    }
+    &--styleAttack, &--styleRun {
+        border: 2px solid $blue;
+        cursor: pointer;
+        transition:  0.2s ease-in;
+    }
+    &--styleRun {
+        @include borderRadius(50%);
+    }
+    &--left, &--right {
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        &:hover {
+            border-color: #aaa;
+        }
+    }
+    &--left {
+        background-image: url('../images/arrowLeft.png');
+        float: left;
+    }
+    &--right {
+        background-image: url('../images/arrowRight.png');
+        float: right;
+    }
+    &--txtAttack {
+        @include txt (28px, 4px, uppercase, center, 400);
+        &:hover {
+            color: $blue;
+        }
+    }
+}
+.bullet {
+    position: absolute;
+    width: 3px;
+    height: 10px;
+    left: 50%;
+    &--player {
+        background-color: $blue;  
+    }
+    &--enemy {
+        background-color: #00fe00;  
+    }
+}
+$playerWidth: 4vw;
+.ship {
+    position: absolute;
+    &__player {
+        bottom: 2vh;
+        width: $playerWidth;
+        height: 4vh;
+        left: calc(50% - 15px);
+        background-color: $blue;
+        @include borderRadius(0.5vw);
+        &:after {
+            position: absolute;
+            content: '';
+            left: $playerWidth / 2 - 0.5;
+            width: 1vw;
+            height: 1.6vh;
+            background: $blue;
+            transform: translateY(-1.6vh);
+        }
+    }
+    &__enemy {
+        width: 4.5vw;
+        height: 3vw;
+        left: 2%;
+    }
+    &__mystery {
+        width: 6.39vw;
+        height: 3vw;
+        left: 0%;
+        top: 1vh;
+        background-image: url('../images/mysteryShip.png');
+    }
+    &--bg {
+        background-repeat:no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+@mixin txtSize ($title, $tSign, $startGame, $data, $desc) {
+    &--txtTitle {
+        @include txt($title, 2px, uppercase, center, 400);
+    }
+    &--txtTitleSign {
+        @include txt($tSign, 1px, uppercase, right, 400);
+    }
+    &--txtStartGame {
+        @include txt($startGame, 4px, uppercase, center, 700);
+    }
+    &--txtData {
+        @include txt($data, 1px, uppercase, left, 400);
+    }
+    &--txtDescription {
+        @include txt($desc, 0px, uppercase, left, 300);
+    }
+}
+//MEDIA QUERY
+@media (max-width: 1450px) and (min-width: 1100px) {
+    .interface {
+        &__title, &__date {
+            margin: 0 0 4vh 0;
+        }
+        @include txtSize(26px, 13px, 28px, 16px, 11px);
+    }
+    .lives {
+        width: 100%;
+        height: 5vh;
+        margin-top: 4vh;
+        padding-bottom: 2vh;
+    }
+    .movement {
+        bottom: 50px;
+        &__run {
+            width: 6vh;
+            height: 6vh;
+        }
+        &__attack {
+            margin-top: 1.5vh;
+        }
+        &--txtAttack {
+            @include txt (22px, 4px, uppercase, center, 400);
+        }
+    }
+}
+@media (max-width: 1100px) {
+    .game {
+        &__board {
+            width: calc(76% - 15px);
+        }
+    }
+    .interface {
+        width: 20%;
+        &__title, &__date {
+            margin: 0 0 2vh 0;
+        }
+        @include txtSize(21px, 13px, 22px, 14px, 10px);
+    }
+    .lives {
+        width: 100%;
+        height: 5vh;
+        margin-top: 2vh;
+        padding-bottom: 1vh;
+    }
+    .movement {
+        width: 20%;
+        bottom: 50px;
+        &__run {
+            width: 4vh;
+            height: 4vh;
+        }
+        &__attack {
+            margin-top: 0.9vh;
+        }
+        &--txtAttack {
+            @include txt (13px, 4px, uppercase, center, 400);
+        }
+    }
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang='pl'>
+<head>
+	<meta charset='Utf-8'>
+	<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
+	<title>Poyters: Kosmiczni Przybysze</title>
+	<meta name='Keywords' content='space, invaders, poyters'/>
+	<meta name='Description' content='Space Invaders, ver. Poyters'/>
+	<meta name='Author' content='Rafał Gabriel Kostecki'/>
+	<link rel='Shortcut icon' href='http://i.imgur.com/fo1ARHc.png'/>
+
+	<link rel='stylesheet' href='./style/style.css' type='text/css'/>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400' rel='stylesheet'>
+
+	<script src='./gameEngine/jquery-1.11.3.min.js'> </script>
+	<!--Space Invaders, ver. Poyters is fan-created game released by Tatio Corporation in 1978 -->
+	<!--If there are any objections to the ownership of Space Invaders, please contact me and the fan version will disappear.-->
+</head>
+<body>
+	<div class='game'>
+		<main class='game__board game--bg game--decoration'> </main>
+		<section class='interface interface--decoration'>
+			<header class='interface__title'>
+				<p class='interface--txtTitle'>Kosmiczni Przybysze</p>
+				<p class='interface--txtTitleSign'>wer. poyters</p>
+			</header>
+			<div class='interface__startGame interface--frame interface--txtStartGame'>
+				<span>start</span>
+			</div>
+			<div class='interface__date'>
+				<ul class='interface--txtData'>
+					<li>plansza: <span id='interfaceBoard'> </span></li>
+					<li>punkty: <span id='interfacePoints'> </span></li>
+					<li>wystrzelone naboje: <span id='interfaceBullets'> </span></li>
+					<li>celność: <span id='interfaceAccuracy'> </span></li>
+				</ul>
+				
+				<section class='lives'>
+					<div id='live1' class='lives__box lives--icon'> </div>
+					<div id='live2' class='lives__box lives--icon'> </div>
+					<div id='live3' class='lives__box lives--icon'> </div>
+					<div id='live4' class='lives__box lives--icon'> </div>
+					<div id='live5' class='lives__box lives--icon'> </div>
+				</section>
+
+				<section class='movement'>
+					<div class='movement__run movement--styleRun movement--left'> </div>
+					<div class='movement__run movement--styleRun movement--right'> </div>
+					<div class='movement__attack movement--styleAttack movement--txtAttack'>
+						<span>atakuj!</span>
+					</div>
+				</section>
+				<footer class='interface__description interface--txtDescription'>
+					<span>Created by Rafał Kostecki</span>
+				</footer>
+			</div>
+		</section>
+	</div>
+
+	<script src='./gameEngine/vehicle.js'> </script>
+	<script src='./gameEngine/enemyArmy.js'> </script>
+	<script src='./gameEngine/player.js'> </script>
+	<script src='./gameEngine/init.js'> </script>
+	<script src='./gameEngine/bullet.js'> </script>
+</body>
+</html>
