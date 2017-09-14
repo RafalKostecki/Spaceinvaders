@@ -73,7 +73,7 @@ class PlayerBullet extends Bullet {
                 if (i> 39 && i<50) player.points += 30;
                 document.getElementById('interfacePoints').innerHTML = player.points;
                 if(player.killed == enemyArmy.allEnemyShips.length) { //If player shot down all enemy ships
-                    initGame.nextLevel();
+                    INIT_GAME.nextLevel();
                 }
             }
         }
@@ -105,7 +105,7 @@ class EnemyBullet extends Bullet {
                 $('#live'+player.lives).remove();
                 player.lives--;
             }
-            if (player.lives==0) initGame.clearGame();
+            if (player.lives==0) INIT_GAME.clearGame();
         }
     };
 }
