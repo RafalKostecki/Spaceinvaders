@@ -29,18 +29,14 @@ $(function () {
 });
 
 $(document).keydown((b) => { 
-    INIT_GAME.keyDown(b);
+    PLAYER_MOVEMENT.keyDown(b);
     if(b.keyCode == 32 && startGame) player.shoot(); //If player press space button, player ship will shoot
 });
 $(document).keyup((a) => { //When key up, this stop loop
-    INIT_GAME.keyUp(a);
+    PLAYER_MOVEMENT.keyUp(a);
 });
 
 const INIT_GAME = {
-    _typeKey: null,
-    _loopOperator: true,
-    _startKey: null,
-    _keyMove: [65, 37, 68, 39], //This is key code of buttons which determines move player
     board: 1,
     bullets: 0,
     accuracy: 0,
@@ -133,6 +129,14 @@ const INIT_GAME = {
         AUDIO_GAME3.pause();
         AUDIO_MYSTERY_SHIP.pause();
     },
+};
+
+const PLAYER_MOVEMENT = {
+    _typeKey: null,
+    _loopOperator: true,
+    _startKey: null,
+    _keyMove: [65, 37, 68, 39], //This is key code of buttons which determines move player
+    
     keyDown: function(b) {
         if (!(this._keyMove.indexOf(b.keyCode) > -1) || !startGame) return; //If player pressed key of wasd or arraows on keyboard
         _startKey = true;
@@ -156,7 +160,7 @@ const INIT_GAME = {
             setTimeout(() => this.operator(type), 10); //Do next step after 0.01 sec
         }
     }
-};
+}
 
 const MANUAL_MOVEMENT = {
     _timeMove: 10,
@@ -183,4 +187,5 @@ const MANUAL_MOVEMENT = {
         setTimeout(() => this.moveLoop(type), this._timeMove);
     },
 }
+
 
