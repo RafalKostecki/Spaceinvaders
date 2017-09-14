@@ -102,7 +102,7 @@ const INIT_GAME = {
         }, 1000)
     },
     createArmy: function() {
-        enemyArmy = new EnemyArmy();
+        enemyArmy = new ENEMY_ARMY();
         enemyArmy.createArmy();
         mystery = new MysteryShip(2);
         mystery.setMysteryLine();
