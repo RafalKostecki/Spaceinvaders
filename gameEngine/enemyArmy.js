@@ -1,4 +1,4 @@
-var EnemyArmy = function () {
+const ENEMY_ARMY = function () {
     function EnemyArmyConstructor() {
         this.allEnemyShips = [];
         this.spaceL = 10; //In percent
@@ -28,7 +28,7 @@ var EnemyArmy = function () {
         }, 1200); 
     }
     EnemyArmyConstructor.prototype.createAnimation= function () {
-        var loop = setTimeout(() => {
+        let loop = setTimeout(() => {
             if (this.g<this.lines.length*10) {
                 if (this.g != 0 && this.g%10 == 0) { //This change horizontal line
                     this.currentLine++;
@@ -83,7 +83,7 @@ var EnemyArmy = function () {
                 if(ship.getPosition(0) > $('.game__board').height()*0.80) {
                     startGame = false;
                     setTimeout(function () {
-                        initGame.clearGame();
+                        INIT_GAME.clearGame();
                     }, 1000)
                 }
             }
@@ -119,12 +119,12 @@ var EnemyArmy = function () {
     EnemyArmyConstructor.prototype.movementSystem = function () {
         let position = undefined;
         let ship;
-         let width = $('.game__board').width();
+        let width = $('.game__board').width();
         for (i=0; i<this.allEnemyShips.length; i++) { //Every ship perform the specified movement
             if (!this.switchMove && !this.allEnemyShips[i].dead) this.allEnemyShips[i].move(0, 0);
             if (this.switchMove && !this.allEnemyShips[i].dead) this.allEnemyShips[i].move(1, 0);
         }
-        var move = (() => {
+        let move = (() => {
             for (i=0; i<this.lines.length; i++) {
                 //If that.switchMove === true, ships will be move to the right; fasle=left
                 //If taht.switchMove is equal to true, script choose the last vertical row of ships (right); input k == 9; !switchMove input j == 0 (first row of ships)
