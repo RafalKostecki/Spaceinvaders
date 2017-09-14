@@ -16,27 +16,27 @@ AUDIO_GAME3.loop = true;
 player = undefined;
 enemyArmy = undefined;
 mystery = undefined;
-var startGame = false;
-$(function () { //We create events for buttons
+let startGame = false;
+$(function () {
     let startButton = document.querySelector('.interface__startGame');
-    startButton.addEventListener('click', () => initGame.startGame());
+    startButton.addEventListener('click', () => INIT_GAME.startGame());
     let leftButton = document.querySelector('.movement--left');
-    leftButton.addEventListener('mousedown', () => manualMovement.keyDown(0));
-    leftButton.addEventListener('mouseup', () => manualMovement.keyUp());
+    leftButton.addEventListener('mousedown', () => MANUAL_MOVEMENT.keyDown(0));
+    leftButton.addEventListener('mouseup', () => MANUAL_MOVEMENT.keyUp());
     let rightButton = document.querySelector('.movement--right');
-    rightButton.addEventListener('mousedown', () => manualMovement.keyDown(1));
-    rightButton.addEventListener('mouseup', () => manualMovement.keyUp());
+    rightButton.addEventListener('mousedown', () => MANUAL_MOVEMENT.keyDown(1));
+    rightButton.addEventListener('mouseup', () => MANUAL_MOVEMENT.keyUp());
 });
 
 $(document).keydown((b) => { 
-    initGame.keyDown(b);
+    INIT_GAME.keyDown(b);
     if(b.keyCode == 32 && startGame) player.shoot(); //If player press space button, player ship will shoot
 });
 $(document).keyup((a) => { //When key up, this stop loop
-    initGame.keyUp(a);
+    INIT_GAME.keyUp(a);
 });
 
-var initGame = {
+const INIT_GAME = {
     _typeKey: null,
     _loopOperator: true,
     _startKey: null,
@@ -158,7 +158,7 @@ var initGame = {
     }
 };
 
-var manualMovement = {
+const MANUAL_MOVEMENT = {
     _timeMove: 10,
     _canMove: false,
     _cantDoubleMove: true,
@@ -183,3 +183,4 @@ var manualMovement = {
         setTimeout(() => this.moveLoop(type), this._timeMove);
     },
 }
+
