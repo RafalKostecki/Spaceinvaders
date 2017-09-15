@@ -83,7 +83,7 @@ const ENEMY_ARMY = function () {
                 if(ship.getPosition(0) > $('.game__board').height()*0.80) {
                     startGame = false;
                     setTimeout(function () {
-                        INIT_GAME.clearGame();
+                        initGame.clearGame();
                     }, 1000)
                 }
             }
@@ -278,7 +278,7 @@ class MysteryShip extends Vehicle {
         else $(this.ship).remove();
         AUDIO_MYSTERY_SHIP.pause();
     }
-    checkShoot(bullet, playerBullet) { //This method checks whether mystery ships was shot down
+    collides(bullet, playerBullet) { //This method checks whether mystery ships was shot down
         let position = $(this.ship).position();
         let pointA = position.left;
         let pointB = pointA + $(this.ship).width();
