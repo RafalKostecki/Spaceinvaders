@@ -17,26 +17,8 @@ player = undefined;
 enemyArmy = undefined;
 mystery = undefined;
 let startGame = false;
-$(function () {
-    let startButton = document.querySelector('.interface__startGame');
-    startButton.addEventListener('click', () => INIT_GAME.startGame());
-    let leftButton = document.querySelector('.movement--left');
-    leftButton.addEventListener('mousedown', () => MANUAL_MOVEMENT.keyDown(0));
-    leftButton.addEventListener('mouseup', () => MANUAL_MOVEMENT.keyUp());
-    let rightButton = document.querySelector('.movement--right');
-    rightButton.addEventListener('mousedown', () => MANUAL_MOVEMENT.keyDown(1));
-    rightButton.addEventListener('mouseup', () => MANUAL_MOVEMENT.keyUp());
-});
 
-$(document).keydown((b) => { 
-    PLAYER_MOVEMENT.keyDown(b);
-    if(b.keyCode == 32 && startGame) player.shoot(); //If player press space button, player ship will shoot
-});
-$(document).keyup((a) => { //When key up, this stop loop
-    PLAYER_MOVEMENT.keyUp(a);
-});
-
-const INIT_GAME = {
+const initGame = {
     board: 1,
     bullets: 0,
     accuracy: 0,
@@ -131,31 +113,28 @@ const INIT_GAME = {
     },
 };
 
-const PLAYER_MOVEMENT = {
-    _typeKey: null,
-    _loopOperator: true,
-    _startKey: null,
-    _keyMove: [65, 37, 68, 39], //This is key code of buttons which determines move player
-    
+const playerMovement = {
+    //@acces private 
+    typeKey: null,
+    loopOperator: true,
+    startKey: null,
+
     keyDown: function(b) {
-        if (!(this._keyMove.indexOf(b.keyCode) > -1) || !startGame) return; //If player pressed key of wasd or arraows on keyboard
-        _startKey = true;
+        startKey = true;
         if (b.keyCode == 65 || b.keyCode == 37) this.move(0, 1); //Left; Run inside move function
         else this.move(1, 1); //Right
-       
-        this._typeKey = b.keyCode;
+        this.typeKey = b.keyCode;
     },
-    keyUp: function(a) { ///If player pressed key of wasd or arraows on keyboard, the move will be stopped
-        if (!(this._keyMove.indexOf(a.keyCode) > -1)) return;
-        _startKey = false;
+    keyUp: function(a) { //If player pressed key of wasd or arraows on keyboard, the move will be stopped
+        startKey = false;
     },
     operator: function(type) {
-        this._loopOperator = true;
+        this.loopOperator = true;
         this.move(type, 1);
     },
     move: function(type) {
-        if (this._loopOperator && _startKey && type != undefined && startGame) {
-            this._loopOperator = false;
+        if (this.loopOperator && startKey && type != undefined && startGame) {
+            this.loopOperator = false;
             player.move(type); //Do step
             setTimeout(() => this.operator(type), 10); //Do next step after 0.01 sec
         }
@@ -187,5 +166,27 @@ const MANUAL_MOVEMENT = {
         setTimeout(() => this.moveLoop(type), this._timeMove);
     },
 }
+
+$(function () {
+    let startButton = document.querySelector('.interface__startGame');
+    startButton.addEventListener('click', () => initGame.startGame());
+    let leftButton = document.querySelector('.movement--left');
+    leftButton.addEventListener('mousedown', () => MANUAL_MOVEMENT.keyDown(0));
+    leftButton.addEventListener('mouseup', () => MANUAL_MOVEMENT.keyUp());
+    let rightButton = document.querySelector('.movement--right');
+    rightButton.addEventListener('mousedown', () => MANUAL_MOVEMENT.keyDown(1));
+    rightButton.addEventListener('mouseup', () => MANUAL_MOVEMENT.keyUp());
+});
+
+$(document).keydown((b) => { 
+    if (!startGame) return;
+    let keyMove = [65, 37, 68, 39]; //This is key code of buttons which determines move player
+    if (keyMove.indexOf(b.keyCode) > -1) playerMovement.keyDown(b); //If player pressed key of wasd or arraows on keyboard
+    if(b.keyCode == 32) player.shoot(); //If player press space button, player ship will shoot
+});
+$(document).keyup((a) => { //When key up, this stop loop
+    let keyMove = [65, 37, 68, 39];
+    if (keyMove.indexOf(a.keyCode) > -1) playerMovement.keyUp(a);
+});
 
 
