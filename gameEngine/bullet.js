@@ -44,7 +44,7 @@ class PlayerBullet extends Bullet {
             //to eliminuje niepotrzebne sprawdzenia przed pierwszą linią i za ostatnią linią;
             this.checkLine();
         };
-        if (!mystery.dead && this.bottom >= mystery.mysteryLine && this.bottom <= mystery.mysteryLine + this.bulletSpeed) mystery.checkShoot(this, this.bulletPosition);
+        if (!mystery.dead && this.bottom >= mystery.mysteryLine && this.bottom <= mystery.mysteryLine + this.bulletSpeed) mystery.collides(this, this.bulletPosition);
     
         this.bottom >= this.gameWindowHeight ? this.cassation() : setTimeout(() => this.move(), 10);
     };
@@ -53,11 +53,11 @@ class PlayerBullet extends Bullet {
         for (i=0; i<enemyArmy.lines.length; i++) {
             if (this.bottom >= enemyArmy.lines[i] && this.bottom < enemyArmy.lines[i] + this.bulletSpeed) { //This mark space between line and line increased by bulletSpeed
                 scopeLine = i * 10;
-                this.checkShoot(scopeLine, scopeLine+10);
+                this.collides(scopeLine, scopeLine+10);
             }
         }
     };
-    checkShoot(scopeLineA, scopeLineB) { //This check whether enemy ship was shot down
+    collides(scopeLineA, scopeLineB) { //This check whether enemy ship was shot down
         for (i=scopeLineA; i<scopeLineB; i++) {
             let pointA = enemyArmy.allEnemyShips[i].getPosition(1);
             let pointB = pointA + enemyArmy.allEnemyShips[i].widthShip;
@@ -73,7 +73,7 @@ class PlayerBullet extends Bullet {
                 if (i> 39 && i<50) player.points += 30;
                 document.getElementById('interfacePoints').innerHTML = player.points;
                 if(player.killed == enemyArmy.allEnemyShips.length) { //If player shot down all enemy ships
-                    INIT_GAME.nextLevel();
+                    initGame.nextLevel();
                 }
             }
         }
@@ -90,11 +90,11 @@ class EnemyBullet extends Bullet {
         this.bottom -= 5;
         $(this.bulletDiv).css('bottom', this.bottom);
         if(this.bottom <= player.gamerLine && this.bottom >= player.gamerLine - 5) {
-            this.checkAttack(); 
+            this.collides(); 
         }
         this.bottom <= 20 ? this.cassation() : setTimeout(() => this.move(), 20);
     };
-    checkAttack() { //This method checks whether bullet is on player line
+    collides() { //This method checks whether bullet is on player line
         let position = $('.ship__player').position();
         let pointA = position.left;
         let pointB = pointA + $('.ship__player').width();
@@ -105,7 +105,8 @@ class EnemyBullet extends Bullet {
                 $('#live'+player.lives).remove();
                 player.lives--;
             }
-            if (player.lives==0) INIT_GAME.clearGame();
+            if (player.lives==0) initGame.clearGame();
         }
     };
 }
+
