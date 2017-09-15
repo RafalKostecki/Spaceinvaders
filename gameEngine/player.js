@@ -13,8 +13,8 @@ class PlayerShip extends Vehicle {
         AUDIO_SHOOT.play();
         let s = new PlayerBullet(0, this.ship);
         s.create();
-        INIT_GAME.bullets++;
-        document.getElementById('interfaceBullets').innerHTML = INIT_GAME.bullets;
+        initGame.bullets++;
+        document.getElementById('interfaceBullets').innerHTML = initGame.bullets;
         player.accuracy;
         setTimeout(() => this.canShoot = true, 450); //How fast player can shoot
     }
@@ -23,7 +23,7 @@ class PlayerShip extends Vehicle {
         this.gamerLine = $('.game__board').height() - position.top;
     }
     get accuracy() { //The accuracy of the player
-        let accuracy = (player.killed / INIT_GAME.bullets) * 100;
+        let accuracy = (player.killed / initGame.bullets) * 100;
         document.getElementById('interfaceAccuracy').innerHTML = accuracy.toFixed(2) + '%';
     }
 }
