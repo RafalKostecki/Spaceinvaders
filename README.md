@@ -4,6 +4,6 @@ I created arcade game inspiried by Space Invaders game by Taito Corporation 1978
 
 The game was create with RWD tehnique and you can play on large screen, medium screen and tablet! I used HTML5, CSS3 with Sass preprocessor and BEM methodology, JavaScript (ES6) and jQuery library. 
 
-In the next project similar to this I will throw out jQuery library and I will use instead this canvas.
+In the next project, similar to this, I will throw out jQuery library and I will use instead of this canvas and React.js
 
 You can play this game here: http://poyters.pl/spaceinvaders
