@@ -7,3 +7,5 @@ The game was create with RWD tehnique and you can play on large screen, medium s
 In the next project, similar to this, I will throw out jQuery library and I will use instead of this canvas and React.js
 
 You can play this game here: http://poyters.pl/spaceinvaders
+
+Releasd date: 31.08.2017
