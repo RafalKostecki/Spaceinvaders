@@ -100,17 +100,17 @@ const ENEMY_ARMY = function () {
     }
     EnemyArmyConstructor.prototype.setMoveSpeed = function () { //This function sets enemy ships speed of movement and game music
         if (player.killed == 49) {
-            this.moveSpeed = 50;
+            this.moveSpeed = 80;
             AUDIO_GAME2.pause();
             AUDIO_GAME3.play();
         }
         if (player.killed > 46 && player.killed < 49) {
-            this.moveSpeed = 110;
+            this.moveSpeed = 150;
             AUDIO_GAME1.pause();
             AUDIO_GAME2.play();
         }
         if (player.killed > 35 && player.killed < 46) {
-            this.moveSpeed = 180;
+            this.moveSpeed = 230;
             AUDIO_GAME.pause();
             AUDIO_GAME1.play();
         }
@@ -265,6 +265,9 @@ class MysteryShip extends Vehicle {
         this.mysteryLine;
         this.dead = true;
     };
+    move() {
+        return super.move(1);
+    }
     setMysteryLine() { //Set line where is mystery ship 
         this.mysteryLine = $('body').height()*0.99 - $('body').width()*0.03;
     }
@@ -296,7 +299,7 @@ class MysteryShip extends Vehicle {
             this.destroy(false);
         }
         else {
-            this.move(1);
+            this.move();
             setTimeout(() => this.movementSystem(), 15);
         }
     }
