@@ -7,16 +7,25 @@ class PlayerShip extends Vehicle {
         this.canShoot = true;
     };
     
-    shoot() {
+    shoot(type) {
         if (!this.canShoot || !startGame) return;
+        let time;
+        if (type==1) {
+            e.stopPropagation();
+            e.preventDefault();
+            time = 230;
+        }
+        else {
+            time = 450;
+            AUDIO_SHOOT.play();
+        }
         this.canShoot = false;
-        AUDIO_SHOOT.play();
         let s = new PlayerBullet(0, this.ship);
         s.create();
         initGame.bullets++;
         document.getElementById('interfaceBullets').innerHTML = initGame.bullets;
         player.accuracy;
-        setTimeout(() => this.canShoot = true, 450); //How fast player can shoot
+        setTimeout(() => this.canShoot = true, time); //How fast player can shoot
     }
     createPlayerLine() { //this create line where is player, where is he can be hit by enemy ship
         let position = $('.ship__player').position();
