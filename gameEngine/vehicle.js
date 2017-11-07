@@ -1,13 +1,13 @@
 class Vehicle {
     constructor (shipType) {
         switch (shipType) { //Style object choice
-            case 0: //Player ship
+            case 0: //Player ship style
                 this.style = 'ship ship__player';
             break;
-            case 1: //Enemy ship
+            case 1: //Enemy ship style
                 this.style = 'ship ship__enemy ship--bg';
             break;
-            case 2: //Mystery ship
+            case 2: //Mystery ship style
                 this.style = 'ship ship__mystery ship--bg';
             break;
         }
@@ -26,7 +26,7 @@ class Vehicle {
         if (type == 0 && position.left > 5) { //Left
             $(this.ship).css('left', position.left - step + 'px');
         }
-        else if (type == 1 && position.left < $('.game__board').width() - $(this.ship).width() - 5) { //Right
+        else if (type == 1 && position.left < $('.game__board').width() - $(this.ship).width() - 5) { //Move right
             $(this.ship).css('left', position.left + step + 'px');
         }
     }
