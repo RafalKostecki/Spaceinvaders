@@ -18,6 +18,22 @@ enemyArmy = undefined;
 mystery = undefined;
 let startGame = false;
 
+$.fn.extend({
+    disableSelection: function() {
+        this.each(function() {
+            this.onselectstart = function() {
+                return false;
+            };
+            this.unselectable = "on";
+            $(this).css('-moz-user-select', 'none');
+            $(this).css('-webkit-user-select', 'none');
+        });
+    }
+});
+$(function(){
+    $(this).disableSelection();
+});
+
 const initGame = {
     board: 1,
     bullets: 0,
@@ -38,7 +54,8 @@ const initGame = {
         player.createPlayerLine();
         AUDIO_GAME.play();
         let attackButton = document.querySelector('.movement__attack');
-        attackButton.addEventListener('click', () => player.shoot());
+        attackButton.addEventListener('click', () => player.shoot(window.event, 0));
+        attackButton.addEventListener('touchstart', () => player.shoot(window.event, 1));
     },
     clearGame: function() { //Clear all game attrigutes, switches, etc.
         startGame = false;
@@ -171,11 +188,11 @@ $(function () {
     let startButton = document.querySelector('.interface__startGame');
     startButton.addEventListener('click', () => initGame.startGame());
     let leftButton = document.querySelector('.movement--left');
-    leftButton.addEventListener('mousedown', () => MANUAL_MOVEMENT.keyDown(0));
-    leftButton.addEventListener('mouseup', () => MANUAL_MOVEMENT.keyUp());
+    leftButton.addEventListener('touchstart', () => MANUAL_MOVEMENT.keyDown(0));
+    leftButton.addEventListener('touchend', () => MANUAL_MOVEMENT.keyUp());
     let rightButton = document.querySelector('.movement--right');
-    rightButton.addEventListener('mousedown', () => MANUAL_MOVEMENT.keyDown(1));
-    rightButton.addEventListener('mouseup', () => MANUAL_MOVEMENT.keyUp());
+    rightButton.addEventListener('touchstart', () => MANUAL_MOVEMENT.keyDown(1));
+    rightButton.addEventListener('touchend', () => MANUAL_MOVEMENT.keyUp());
 });
 
 $(document).keydown((b) => { 
@@ -188,5 +205,3 @@ $(document).keyup((a) => { //When key up, this stop loop
     let keyMove = [65, 37, 68, 39];
     if (keyMove.indexOf(a.keyCode) > -1) playerMovement.keyUp(a);
 });
-
-
