@@ -2,8 +2,8 @@
 <html lang='pl'>
 <head>
 	<meta charset='Utf-8'>
-	<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
-	<title>Poyters: Kosmiczni Przybysze</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>
+	<title>Poyters: Space newcomers</title>
 	<meta name='Keywords' content='space, invaders, poyters'/>
 	<meta name='Description' content='Space Invaders, ver. Poyters'/>
 	<meta name='Author' content='Rafał Gabriel Kostecki'/>
@@ -14,52 +14,59 @@
 
 	<script src='./gameEngine/jquery-1.11.3.min.js'> </script>
 	<!--Space Invaders, ver. Poyters is fan-created game released by Tatio Corporation in 1978 -->
+	<!--If there are any objections to the ownership of Space Invaders, please contact me and the fan version will disappear.-->
 </head>
 <body>
 	<div class='game'>
 		<main class='game__board game--bg game--decoration'> </main>
 		<section class='interface interface--decoration'>
 			<header class='interface__title'>
-				<p class='interface--txtTitle'>Kosmiczni Przybysze</p>
-				<p class='interface--txtTitleSign'>wer. poyters</p>
+				<p class='interface--txtTitle'>Space newcomers</p>
+				<p class='interface--txtTitleSign'>ver. poyters</p>
 			</header>
 			<div class='interface__startGame interface--frame interface--txtStartGame'>
 				<span>start</span>
 			</div>
 			<div class='interface__date'>
 				<ul class='interface--txtData'>
-					<li>plansza: <span id='interfaceBoard'> </span></li>
-					<li>punkty: <span id='interfacePoints'> </span></li>
-					<li>wystrzelone naboje: <span id='interfaceBullets'> </span></li>
-					<li>celność: <span id='interfaceAccuracy'> </span></li>
+					<li>Board <span id='interfaceBoard'> </span></li>
+					<li>Points <span id='interfacePoints'> </span></li>
+					<li>Bullets <span id='interfaceBullets'> </span></li>
+					<li>Accuracy <span id='interfaceAccuracy'> </span></li>
 				</ul>
-				
-				<section class='lives'>
-					<div id='live1' class='lives__box lives--icon'> </div>
-					<div id='live2' class='lives__box lives--icon'> </div>
-					<div id='live3' class='lives__box lives--icon'> </div>
-					<div id='live4' class='lives__box lives--icon'> </div>
-					<div id='live5' class='lives__box lives--icon'> </div>
+
+				<section class='life'>
+					<div id='life1' class='life__box life--icon'> </div>
+					<div id='life2' class='life__box life--icon'> </div>
+					<div id='life3' class='life__box life--icon'> </div>
+					<div id='life4' class='life__box life--icon'> </div>
+					<div id='life5' class='life__box life--icon'> </div>
 				</section>
 
 				<section class='movement'>
-					<div class='movement__run movement--styleRun movement--left'> </div>
-					<div class='movement__run movement--styleRun movement--right'> </div>
-					<div class='movement__attack movement--styleAttack movement--txtAttack'>
-						<span>atakuj!</span>
+					<div class='movement__run movement--styleRun movement--left noSelect'> </div>
+					<div class='movement__run movement--styleRun movement--right noSelect'> </div>
+					<div class='movement__attack movement--styleAttack movement--txtAttack noSelect'>
+						<span id='at' class='noSelect'>Attack</span>
 					</div>
 				</section>
 				<footer class='interface__description interface--txtDescription'>
-					<span>Created by Rafał Kostecki</span>
+					<span class='noSelect'>Created by Rafał Kostecki</span>
 				</footer>
 			</div>
 		</section>
 	</div>
 
 	<script src='./gameEngine/vehicle.js'> </script>
+	<script src='./gameEngine/enemyShip.js'> </script>
+	<script src='./gameEngine/mysteryShip.js'> </script>
 	<script src='./gameEngine/enemyArmy.js'> </script>
 	<script src='./gameEngine/player.js'> </script>
 	<script src='./gameEngine/init.js'> </script>
+	<script src='./gameEngine/playerMovement.js'> </script>
+	<script src='./gameEngine/manualMovement.js'> </script>
 	<script src='./gameEngine/bullet.js'> </script>
+	<script src='./gameEngine/playerBullet.js'> </script>
+	<script src='./gameEngine/enemyBullet.js'> </script>
 </body>
 </html>
