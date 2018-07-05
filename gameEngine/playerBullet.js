@@ -8,7 +8,7 @@ class PlayerBullet extends Bullet {
     this.dead = false;
   };
 
-  move() { //jest git
+  move() {
     if (!startGame) return;
 
     this.bottom += this.bulletSpeed; //Bottom spacing rising
