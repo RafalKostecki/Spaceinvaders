@@ -3,14 +3,14 @@ const playerMovement = {
   loopOperator: true,
   startKey: null,
 
-  keyDown: function(b) {
+  keyDown: function(event) {
     startKey = true;
-    if (b.keyCode == 65 || b.keyCode == 37) this.move(0, 1); //Left; Run inside move function
+    if (event.keyCode == 65 || event.keyCode == 37) this.move(0, 1); //Left
     else this.move(1, 1); //Right
-    this.typeKey = b.keyCode;
+    this.typeKey = event.keyCode;
   },
 
-  keyUp: function(a) { //If player pressed key of wasd or arraows on keyboard, the move will be stopped
+  keyUp: function() { //If player pressed key of wasd or arrows on keyboard, the move will be stopped
     startKey = false;
   },
 
