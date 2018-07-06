@@ -10,24 +10,24 @@ class MysteryShip extends Vehicle {
   };
 
   setMysteryLine() { //Set line where is mystery ship
-    this.mysteryLine = $('body').height()*0.99 - $('body').width()*0.026;
+    const body = document.getElementById('body');
+    this.mysteryLine = body.clientHeight*0.99 - body.clientWidth*0.026;
   };
 
   destroy(animation) { //This method will destroy mystery ship when he will be shot down or he will be off the board
     this.dead = true;
     if (animation) {
       audioInvaderKilled.play();
-      $(this.ship).css('background-image', 'url("./images/destroyedMystery.png")')
-      setTimeout(() => $(this.ship).remove(), 250);
+      this.ship.style.backgroundImage = 'url("./images/destroyedMystery.png")';
+      setTimeout(() => this.ship.remove(), 250);
     }
-    else $(this.ship).remove();
+    else this.ship.remove();
     audioMysteryShip.pause();
   };
 
   collides(bullet, playerBullet) { //This method checks whether mystery ships was shot down
-    let position = $(this.ship).position();
-    let pointA = position.left;
-    let pointB = pointA + $(this.ship).width();
+    const pointA = parseInt(this.ship.style.left);
+    const pointB = pointA + this.ship.clientWidth;
 
     if(playerBullet > pointA && playerBullet < pointB) {
       bullet.cassation();
@@ -38,8 +38,9 @@ class MysteryShip extends Vehicle {
 
   movementSystem() {
     if (this.dead) return;
-    let position = $(this.ship).position();
-    if (position.left > $('.game__board').width() - $(this.ship).width() - 5) {
+
+    const gameBoard = document.getElementById('gameBoard');
+    if (parseInt(this.ship.style.left) > gameBoard.clientWidth - this.ship.clientWidth - 5) {
       this.destroy(false);
     }
     else {
@@ -50,6 +51,7 @@ class MysteryShip extends Vehicle {
 
   run() {
     if (!startGame) return;
+
     audioMysteryShip.play();
     this.dead = false;
     mystery.createShip('mystery');
