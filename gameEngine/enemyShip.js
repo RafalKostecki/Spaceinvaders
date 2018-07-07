@@ -10,9 +10,9 @@ class EnemyShip extends Vehicle {
   };
 
 
-  setOnBoard() { //This method set ship on the game board
-    this.ship.style.left = enemyArmy.spaceL + '%';
-    this.ship.style.bottom = enemyArmy.spaceT + 'vh';
+  setOnBoard(leftSpace, topSpace) { //This method set ship on the game board
+    this.ship.style.left = leftSpace + '%';
+    this.ship.style.bottom = topSpace + 'vh';
 
     this.setAnimation();
     this.animation();
