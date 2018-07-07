@@ -1,6 +1,6 @@
 class Vehicle {
   constructor (shipType) {
-    switch (shipType) { 
+    switch (shipType) {
       case 0: //Player ship
         this.style = 'ship ship__player';
       break;
@@ -27,17 +27,20 @@ class Vehicle {
     if (!startGame) return;
 
     const gameBoard = document.getElementById('gameBoard');
-    const position = $(this.ship).position();
+    const x = window.getComputedStyle(this.ship, null).getPropertyValue('left');
+    const left = this.ship.style.left === '' ? x : this.ship.style.left;
+    const lastChar = left.substr(left.length - 1);
+    const leftSpace = lastChar === '%' ? gameBoard.clientWidth*(parseInt(left)/100) : parseInt(left); //We have to define leftSpace from percentage to px
     let step; //This determines how big is step
 
     if (typeShip == 0) step = gameBoard.clientWidth*0.03; //Enemy ship step
     else step = 5;
 
-    if (type == 0 && position.left > 5) { //Left
-      this.ship.style.left = position.left - step + 'px';
+    if (type == 0 && leftSpace > 5) { //Left
+      this.ship.style.left = leftSpace - step + 'px';
     }
-    else if (type == 1 && position.left < gameBoard.clientWidth - this.ship.clientWidth - 5) { //Right
-      this.ship.style.left = position.left + step + 'px';
+    else if (type == 1 && leftSpace < gameBoard.clientWidth - this.ship.clientWidth - 5) { //Right
+      this.ship.style.left = leftSpace + step + 'px';
     }
 
   };
