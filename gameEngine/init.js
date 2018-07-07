@@ -18,22 +18,6 @@ enemyArmy = undefined;
 mystery = undefined;
 let startGame = false;
 
-$.fn.extend({
-  disableSelection: function() {
-    this.each(function() {
-      this.onselectstart = function() {
-        return false;
-      };
-      this.unselectable = "on";
-      $(this).css('-moz-user-select', 'none');
-      $(this).css('-webkit-user-select', 'none');
-    });
-  }
-});
-$(function(){
-  $(this).disableSelection();
-});
-
 const initGame = {
   board: 1,
   bullets: 0,
@@ -56,6 +40,8 @@ const initGame = {
   },
 
   clearGame: function() { //Clear all game attrigutes, switches, etc.
+    const playerShip = document.getElementById('player');
+
     startGame = false;
     document.getElementById('interfaceBoard').innerHTML = '';
     document.getElementById('interfaceBullets').innerHTML = '';
@@ -66,13 +52,14 @@ const initGame = {
     this.deleteBullets();
     this.deleteArmy();
     delete player;
-    $('.ship__player').remove();
+    playerShip.remove();
     this.clearSounds();
+
     for (let i=1; i<6; i++) { //Restart players lifes (interface)
       const lifes = document.getElementById('lifesId');
-      let y = document.getElementById('life'+i);
+      const y = document.getElementById('life'+i);
       if(y===null) {
-        let x = document.createElement('div');
+        const x = document.createElement('div');
         x.className = 'life__box life--icon';
         x.id = 'life'+i;
         lifes.appendChild(x);
@@ -117,10 +104,12 @@ const initGame = {
   deleteArmy: function() {
     for(i=0; i<enemyArmy.allEnemyShips.length; i++) {
       enemyArmy.allEnemyShips[i].ship.remove();
-      delete  enemyArmy.allEnemyShips[i];
+      delete enemyArmy.allEnemyShips[i];
     }
 
-    $('.ship__mystery').remove();
+
+    const mysteryShip = document.getElementById('mystery');
+    if (mysteryShip) mysteryShip.remove();
     enemyArmy.allEnemyShips = [];
     delete enemyArmy;
     delete mystery;
